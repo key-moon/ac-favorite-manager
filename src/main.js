@@ -9,5 +9,8 @@
 // @exclude     https://atcoder.jp/*/json
 // ==/UserScript==
 
+import overrideDefaultFavHandler from "./overrideDefaultFavHandler";
 import generateElement from "./generateElement";
+
+overrideDefaultFavHandler();
 generateElement();
