@@ -8,3 +8,6 @@
 // @match       https://atcoder.jp/*
 // @exclude     https://atcoder.jp/*/json
 // ==/UserScript==
+
+import generateElement from "./generateElement";
+generateElement();
