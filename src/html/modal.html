@@ -6,7 +6,55 @@
 				<h4 class="modal-title">お気に入り管理</h4>
 			</div>
 			<div class="modal-body">
-				<p>うぃーんﾋﾞｰﾄﾋﾞｰﾄひるどwwwwwwうっくっくwwwwwwえいえいえt(←いずらいt)いえいwwwwらて。</p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="form-inline">
+                            <div class="col-sm-12 form-group">
+                                <label for="select-sets">セット: </label>
+                                <select id="select-sets" class="form-control" data-placeholder="default" data-allow-clear="false" style="width: 50%;">
+                                    <option>default</option>
+                                </select>
+                                <button type="button" class="btn btn-default">エクスポート</button>
+                                <button type="button" class="btn btn-danger pull-right">削除</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">セット名</span>
+                                <input type="text" class="form-control" placeholder="サークル">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default">作成</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">ユーザ名</span>
+                                <input type="text" class="form-control" placeholder="tourist">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default">追加</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="form-inline">
+                            <div class="pull-right form-group">
+                                <button type="button" class="btn btn-default">インポート</button>
+                                <button type="button" class="btn btn-default">全てエクスポート</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
