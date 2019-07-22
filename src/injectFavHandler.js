@@ -3,20 +3,14 @@ import globalFavSets from "./globalFavSets";
 
 
 export default function () {
-    //migration
-    if (!getLS('favmanager-favSets')) {
-        getLS('fav').forEach((user) => {
-            globalFavSets.sets.default.add(user);
-        });
-    }
-
     storeFavs = () => {
         setLS('favmanager-favSets', favSets.stringify(globalFavSets));
         setLS('fav', setToArray(favSet));
     };
 
     reloadFavs = () => {
-        favmanager_favSets = favSets.parse(getLS('favmanager-favSets') || "[]");
+        globalFavSets.initialize();
+        globalFavSets.mergeWith(favSets.parse(getLS('favmanager-favSets') || "[]"));
         favSet = globalFavSets.favSet;
     };
 
@@ -36,4 +30,16 @@ export default function () {
         storeFavs();
         return res; // has val now
     };
+
+
+    //migration
+    if (!getLS('favmanager-favSets')) {
+        getLS('fav').forEach((user) => {
+            globalFavSets.sets.default.add(user);
+        });
+        storeFavs();
+    }
+    else{
+        reloadFavs();
+    }
 }
