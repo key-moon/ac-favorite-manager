@@ -23,32 +23,7 @@
                     </div>
                     <div class="row">
                         <table class="table">
-                            <tbody>
-                            <tr>
-                                <td>kort0n</td>
-                                <td>hoget157</td>
-                                <td>drken</td>
-                            </tr>
-                            <tr>
-                                <td>platypus</td>
-                                <td>omochana2</td>
-                                <td>fuppy0716</td>
-                            </tr>
-                            <tr>
-                                <td>risujiroh</td>
-                                <td>akouryy</td>
-                                <td>Misteer</td>
-                            </tr>
-                            <tr>
-                                <td>yosss</td>
-                                <td>MMNMM</td>
-                                <td>pachicobue</td>
-                            </tr>
-                            <tr>
-                                <td>NMLibrary </td>
-                                <td>noimi</td>
-                                <td>ngtkana </td>
-                            </tr>
+                            <tbody id="fav-manager-users-table">
                             </tbody>
                         </table>
                     </div>
@@ -74,19 +49,11 @@
                     </div>
                     <p></p>
                     <div class="row">
-                        <div class="form-inline">
-                            <div class="form-group pull-right">
-                                <div class="input-group">
-                                    <label class="input-group-btn">
-                                        <span class="btn btn-primary">ファイルを選択<input id="fav-manager-select-import-file" type="file" style="display:none" accept=".json"></span>
-                                    </label>
-                                    <input type="text" class="form-control" readonly="">
-                                    <span class="input-group-btn">
-                                        <button id="fav-manager-import" type="button" class="btn btn-default">インポート</button>
-                                    </span>
-                                </div>
-                                <button id="fav-manager-export-all" type="button" class="btn btn-default">全てエクスポート</button>
-                            </div>
+                        <div class="input-group pull-right">
+                            <label>
+                                <span class="btn btn-primary">ファイルを選択<input id="fav-manager-select-import-file-button" type="file" style="display:none" accept=".json" multiple></span>
+                            </label>
+                            <button id="fav-manager-export-all" type="button" class="btn btn-default">全てエクスポート</button>
                         </div>
                     </div>
                 </div>
