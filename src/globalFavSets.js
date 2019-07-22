@@ -1,3 +1,6 @@
 import {favSets} from "./favs";
 
-export default new favSets();
+let globalFavSets = new favSets();
+globalFavSets.initialize();
+
+export default globalFavSets;
