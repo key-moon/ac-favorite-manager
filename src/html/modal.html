@@ -10,18 +10,45 @@
                     <div class="row">
                         <div class="form-inline">
                             <div class="col-sm-12 form-group">
-                                <label for="select-sets">セット: </label>
-                                <select id="select-sets" class="form-control" data-placeholder="default" data-allow-clear="false" style="width: 50%;">
-                                    <option>default</option>
+                                <label for="fav-manager-set-select">セット: </label>
+                                <select id="fav-manager-set-select" class="form-control" data-placeholder="default" data-allow-clear="false" style="width: 30%;">
+                                    <option value="default">default</option>
+                                    <option value="blacklist">blacklist</option>
                                 </select>
-                                <button type="button" class="btn btn-default">エクスポート</button>
-                                <button type="button" class="btn btn-danger pull-right">削除</button>
+                                <button id="fav-manager-toggle-set-activeness-button" type="button" class="btn btn-default"></button>
+                                <button id="fav-manager-set-export-button" type="button" class="btn btn-default">エクスポート</button>
+                                <button id="fav-manager-set-delete-button" type="button" class="btn btn-danger pull-right">削除</button>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <table class="table">
                             <tbody>
+                            <tr>
+                                <td>kort0n</td>
+                                <td>hoget157</td>
+                                <td>drken</td>
+                            </tr>
+                            <tr>
+                                <td>platypus</td>
+                                <td>omochana2</td>
+                                <td>fuppy0716</td>
+                            </tr>
+                            <tr>
+                                <td>risujiroh</td>
+                                <td>akouryy</td>
+                                <td>Misteer</td>
+                            </tr>
+                            <tr>
+                                <td>yosss</td>
+                                <td>MMNMM</td>
+                                <td>pachicobue</td>
+                            </tr>
+                            <tr>
+                                <td>NMLibrary </td>
+                                <td>noimi</td>
+                                <td>ngtkana </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -29,18 +56,18 @@
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-addon">セット名</span>
-                                <input type="text" class="form-control" placeholder="サークル">
+                                <input id="fav-manager-add-set-input" type="text" class="form-control" placeholder="サークル">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default">作成</button>
+                                    <button id="fav-manager-add-set-button" type="button" class="btn btn-default">作成</button>
                                 </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-addon">ユーザ名</span>
-                                <input type="text" class="form-control" placeholder="tourist">
+                                <input id="fav-manager-add-user-input" type="text" class="form-control" placeholder="tourist">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default">追加</button>
+                                    <button id="fav-manager-add-user-button" type="button" class="btn btn-default">追加</button>
                                 </span>
                             </div>
                         </div>
@@ -48,9 +75,17 @@
                     <p></p>
                     <div class="row">
                         <div class="form-inline">
-                            <div class="pull-right form-group">
-                                <button type="button" class="btn btn-default">インポート</button>
-                                <button type="button" class="btn btn-default">全てエクスポート</button>
+                            <div class="form-group pull-right">
+                                <div class="input-group">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary">ファイルを選択<input id="fav-manager-select-import-file" type="file" style="display:none" accept=".json"></span>
+                                    </label>
+                                    <input type="text" class="form-control" readonly="">
+                                    <span class="input-group-btn">
+                                        <button id="fav-manager-import" type="button" class="btn btn-default">インポート</button>
+                                    </span>
+                                </div>
+                                <button id="fav-manager-export-all" type="button" class="btn btn-default">全てエクスポート</button>
                             </div>
                         </div>
                     </div>
