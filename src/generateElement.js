@@ -62,6 +62,12 @@ function updateView() {
     updateTable();
 }
 
+window.addEventListener("storage", event => {
+    if (event.key !== 'favmanager-favSets') return;
+    reloadFavs();
+    updateView();
+});
+
 export default function(){
     $("body").prepend(modalNode);
     $(".navbar-right .dropdown-menu .divider:nth-last-child(2)").before(dropdownNode);
