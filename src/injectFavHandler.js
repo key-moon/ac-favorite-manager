@@ -5,7 +5,7 @@ import globalFavSets from "./globalFavSets";
 export default function () {
     storeFavs = () => {
         setLS('favmanager-favSets', favSets.stringify(globalFavSets));
-        setLS('fav', setToArray(favSet));
+        setLS('fav', setToArray(favSet = globalFavSets.favSet));
     };
 
     reloadFavs = () => {
