@@ -1,14 +1,27 @@
 
 export class favSets{
     constructor(){
+        this.sets = {};
+        this.isActive = {};
+    }
+
+    initialize(){
         this.sets = {default:new Set(),blacklist:new Set()};
-        this.isActive = {default:true,blacklist:false};
+        this.isActive = {default:true,blacklist:true};
+    }
+
+    createNewSet(key){
+        if (typeof(key) !== "string") throw new Error(`set名 ${JSON.stringify(key)} は文字列型ではありません`);
+        if (this.sets[key]) throw new Error(`set名 ${key} は既に存在しています`);
+        this.sets[key] = new Set();
+        this.isActive[key] = true;
     }
 
     setActive(key, activeness){
-        if (key === "default" || key === "blacklist") throw Error(`activeness of ${key} is fixed`);
-        if (!this.isActive.hasOwnProperty(key)) throw Error(`key ${key} is not found in favSets`);
-        this.isActive[key] = activeness;
+        if (typeof(key) !== "string") throw new Error(`set名 ${JSON.stringify(key)} は文字列型ではありません`);
+        if (favSets.isActivenessFixed(key)) throw Error(`set ${key} の有効値は変更できません`);
+        if (!this.isActive.hasOwnProperty(key)) throw Error(`set名 ${key} は存在していません`);
+        this.isActive[key] = !!(activeness);
     }
 
     mergeWith(newSets){
@@ -20,7 +33,7 @@ export class favSets{
                 this.isActive[key] |= newSets.isActive[key];
             }
             else{
-                this.sets[key] = newSets.key;
+                this.sets[key] = newSets.sets[key];
                 this.isActive[key] = newSets.isActive[key];
             }
         }
@@ -64,13 +77,18 @@ export class favSets{
     static parse(json){
         let sets = new favSets();
         JSON.parse(json).forEach((elem) => {
-            if (!elem.hasOwnProperty("name")) throw new Error(`key "name" not found in ${JSON.stringify(elem)}`);
-            if (!elem.hasOwnProperty("users")) throw new Error(`key "users" not found in ${JSON.stringify(elem)}`);
-            if (!Array.isArray(elem.users)) throw new Error(`Value of key "users"(${JSON.stringify(elem.users)}) is not an array`);
+            if (!elem.hasOwnProperty("name")) throw new Error(`key "name" がオブジェクト ${JSON.stringify(elem)} に存在しません`);
+            if (!elem.hasOwnProperty("users")) throw new Error(`key "users" がオブジェクト ${JSON.stringify(elem)} に存在しません`);
+            if (typeof(elem.name) !== "string") throw new Error(`key "name" の値 (${JSON.stringify(elem.name)}) は文字列型でありません`);
+            if (!Array.isArray(elem.users)) throw new Error(`key "users" の値 (${JSON.stringify(elem.users)}) は配列ではありません`);
 
             sets.sets[elem.name] = arrayToSet(elem.users);
-            sets.isActive[elem.name] = elem.hasOwnProperty("isActive") ? elem.isActive : true;
+            sets.isActive[elem.name] = elem.hasOwnProperty("isActive") ? !!(elem.isActive) : true;
         });
         return sets;
+    }
+
+    static isActivenessFixed(key){
+        return key === "default" || key === "blacklist";
     }
 }
