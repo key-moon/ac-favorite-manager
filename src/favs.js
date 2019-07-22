@@ -62,7 +62,7 @@ export class favSets{
     static stringify(favSets, containActivenessData = true){
         let res = [];
         for (const key in favSets.isActive){
-            let data = {name: key, users: setToArray(favSets.sets[key])};
+            let data = {name: key, users: [...favSets.sets[key]]};
             if (containActivenessData) data.isActive = favSets.isActive[key];
             res.push(data);
         }
