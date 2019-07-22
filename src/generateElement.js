@@ -4,6 +4,7 @@ import globalFavSets from "./globalFavSets";
 import {favSets} from "./favs";
 import {saveFile} from "./files";
 import * as $ from "jquery";
+import getTimeStamp from "./getTimeStamp";
 
 const modalNode = $(modal);
 const dropdownNode = $(dropdownElement);
@@ -59,11 +60,6 @@ function updateView() {
     toggleSetActivenessButtonSelector.prop("disabled", favSets.isActivenessFixed(selectedSet));
     updateSelector();
     updateTable();
-}
-
-function getTimeStamp(){
-    const now = Date.now();
-    return `${now.getFullYear()}${now.getMonth()}${now.getDate()}_${now.getHours()}${now.getMinutes()}${now.getSeconds()}`;
 }
 
 window.addEventListener("storage", event => {
