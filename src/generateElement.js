@@ -137,7 +137,7 @@ export default function(){
                 storeFavs();
                 updateView();
             }
-            catch{
+            catch (e){
                 console.log("failed to load");
             }
         };
