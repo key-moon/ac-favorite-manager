@@ -16,7 +16,8 @@ module.exports = {
         ]
     },
     externals: {
-        jquery: "jQuery"
+        jquery: "jQuery",
+        moment: "moment"
     },
     optimization: {
         minimize: false
