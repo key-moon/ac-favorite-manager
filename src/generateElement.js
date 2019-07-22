@@ -3,7 +3,6 @@ import modal from "./html/modal.html";
 import globalFavSets from "./globalFavSets";
 import {favSets} from "./favs";
 import {saveFile} from "./files";
-import moment from "moment";
 import * as $ from "jquery";
 
 const modalNode = $(modal);
@@ -62,6 +61,11 @@ function updateView() {
     updateTable();
 }
 
+function getTimeStamp(){
+    const now = Date.now();
+    return `${now.getFullYear()}${now.getMonth()}${now.getDate()}_${now.getHours()}${now.getMinutes()}${now.getSeconds()}`;
+}
+
 window.addEventListener("storage", event => {
     if (event.key !== 'favmanager-favSets') return;
     reloadFavs();
@@ -73,14 +77,14 @@ export default function(){
     $(".navbar-right .dropdown-menu .divider:nth-last-child(2)").before(dropdownNode);
 
     $("#fav-manager-export-all", modalNode).click(() => {
-        saveFile(favSets.stringify(globalFavSets), `all-favsets-${moment().format("YYYYYMMDD_hhmmss")}.json`);
+        saveFile(favSets.stringify(globalFavSets), `all-favsets-${getTimeStamp()}.json`);
     });
     $("#fav-manager-set-export-button", modalNode).click(() => {
         const key = getSelectedSet();
         let exportSets = new favSets();
         exportSets.sets[key] = globalFavSets.sets[key];
         exportSets.isActive[key] = true;
-        saveFile(favSets.stringify(exportSets, false), `favset-${key}-${moment().format("YYYYYMMDD_hhmmss")}.json`);
+        saveFile(favSets.stringify(exportSets, false), `favset-${key}-${getTimeStamp()}.json`);
     });
     setSelectSelector.change(updateView);
     setDeleteButtonSelector.click(() => {
