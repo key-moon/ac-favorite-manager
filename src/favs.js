@@ -19,7 +19,7 @@ export class favSets{
 
     setActive(key, activeness){
         if (typeof(key) !== "string") throw new Error(`set名 ${JSON.stringify(key)} は文字列型ではありません`);
-        if (favSets.isActivenessFixed(key)) throw Error(`set ${key} の有効値は変更できません`);
+        if (key === "blacklist") throw Error(`set ${key} の有効値は変更できません`);
         if (!this.isActive.hasOwnProperty(key)) throw Error(`set名 ${key} は存在していません`);
         this.isActive[key] = !!(activeness);
     }
@@ -88,7 +88,7 @@ export class favSets{
         return sets;
     }
 
-    static isActivenessFixed(key){
+    static isSpecialSet(key){
         return key === "default" || key === "blacklist";
     }
 }

@@ -56,8 +56,8 @@ function updateView() {
     console.log(globalFavSets);
     const selectedSet = getSelectedSet();
     toggleSetActivenessButtonSelector.text(globalFavSets.isActive[selectedSet] ? "無効にする" : "有効にする");
-    setDeleteButtonSelector.prop("disabled", favSets.isActivenessFixed(selectedSet));
-    toggleSetActivenessButtonSelector.prop("disabled", favSets.isActivenessFixed(selectedSet));
+    setDeleteButtonSelector.prop("disabled", favSets.isSpecialSet(selectedSet));
+    toggleSetActivenessButtonSelector.prop("disabled", selectedSet === "blacklist");
     updateSelector();
     updateTable();
 }
@@ -85,7 +85,7 @@ export default function(){
     setSelectSelector.change(updateView);
     setDeleteButtonSelector.click(() => {
         const key = getSelectedSet();
-        if (favSets.isActivenessFixed(key)) return;
+        if (favSets.isSpecialSet(key)) return;
         delete globalFavSets.sets[key];
         delete globalFavSets.isActive[key];
         updateSelector();
