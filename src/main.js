@@ -11,31 +11,12 @@
 // @exclude     http://atcoder-circles.com/circles/
 // ==/UserScript==
 
-
-import injectFavHandler from "./injectFavHandler";
-import generateElement from "./generateElement";
-import {favSets} from "./favs";
-import {saveFile} from "./files";
-import getTimeStamp from "./getTimeStamp";
-
+import atcoder_main from "./atcoder/main.js";
+import circles_main from "./circles/main.js";
 
 if (location.hostname === "atcoder.jp"){
-    injectFavHandler();
-    generateElement();
+    atcoder_main();
 }
-else{
-    let elem = $("<div style=\"text-align: center;\"><a style=\"color: gray;\" href=\"#\" onclick=\"return false;\">お気に入り用のファイルをダウンロード</a></div>");
-    $("table").before(elem);
-    $("a", elem).click(() => {
-        const circleName = location.pathname.split('/')[2];
-        $.get(`/circles/${circleName}/api`).then(members => {
-            let exportSets = new favSets();
-            exportSets.sets[circleName] = new Set();
-            exportSets.isActive[circleName] = true;
-            members.forEach((member) => {
-                exportSets.sets[circleName].add(member);
-            });
-            saveFile(favSets.stringify(exportSets, false), `circles-${circleName}-${getTimeStamp()}.json`);
-        });
-    });
+else if (location.hostname === "atcoder-circles.com"){
+    circles_main();
 }

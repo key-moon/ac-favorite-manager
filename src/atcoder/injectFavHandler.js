@@ -1,4 +1,4 @@
-import {favSets} from "./favs";
+import {favSets} from "../favs";
 import globalFavSets from "./globalFavSets";
 
 

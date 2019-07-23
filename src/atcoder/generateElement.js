@@ -1,10 +1,10 @@
 import dropdownElement from "./html/dropdownElement.html";
 import modal from "./html/modal.html";
 import globalFavSets from "./globalFavSets";
-import {favSets} from "./favs";
-import {saveFile} from "./files";
+import {favSets} from "../favs";
+import {saveFile} from "../files";
 import * as $ from "jquery";
-import getTimeStamp from "./getTimeStamp";
+import getTimeStamp from "../getTimeStamp";
 
 const modalNode = $(modal);
 const dropdownNode = $(dropdownElement);
