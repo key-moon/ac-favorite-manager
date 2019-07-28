@@ -114,7 +114,7 @@ export default function(){
          if (e.which === 13) addSetButtonSelector.click();
     });
     addSetButtonSelector.click(() => {
-        const newSetName = setNameInputSelector.val();
+        const newSetName = setNameInputSelector.val().trim();
         if (newSetName) {
             globalFavSets.createNewSet(newSetName);
             updateSelector();
@@ -128,7 +128,7 @@ export default function(){
         if (e.which === 13) addUserButtonSelector.click();
     });
     addUserButtonSelector.click(() => {
-        globalFavSets.sets[getSelectedSet()].add(userNameInputSelector.val());
+        globalFavSets.sets[getSelectedSet()].add(userNameInputSelector.val().trim());
         userNameInputSelector.val("");
         storeFavs();
         updateView();
