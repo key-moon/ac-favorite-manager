@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        ac-favorite-manager
 // @namespace   https://atcoder.jp/
-// @version     1.0.1
+// @version     1.1.0
 // @description AtCoderのお気に入りの管理を行います。
 // @author      keymoon
 // @license     MIT
