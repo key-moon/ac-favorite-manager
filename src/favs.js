@@ -30,11 +30,11 @@ export class favSets{
                 newSets.sets[key].forEach((user) => {
                     this.sets[key].add(user);
                 });
-                this.isActive[key] |= newSets.isActive[key];
+                this.isActive[key] |= !!newSets.isActive[key];
             }
             else{
                 this.sets[key] = newSets.sets[key];
-                this.isActive[key] = newSets.isActive[key];
+                this.isActive[key] = !!newSets.isActive[key];
             }
         }
     }
