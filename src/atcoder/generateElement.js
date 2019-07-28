@@ -43,7 +43,7 @@ function updateTable() {
         if (usersTableSelector[0].lastElementChild.children.length === 3)
             appendRow();
         $(usersTableSelector[0].lastElementChild).append(
-            `<td class="col-sm-4"><span>${E(user)}</span><a class="fav-manager-user-delete-button pull-right" name="${E(user)}" style="cursor : pointer; user-select: none;">×</a></td>`
+            `<td class="col-sm-4"><a href="/users/${encodeURIComponent(user)}">${E(user)}</a><a class="fav-manager-user-delete-button pull-right" name="${E(user)}" style="cursor : pointer; user-select: none;">×</a></td>`
         );
     });
     while (usersTableSelector[0].lastElementChild.children.length < 3){
@@ -69,7 +69,6 @@ function updateDownloadLink() {
 }
 
 function updateView() {
-    console.log(globalFavSets);
     const selectedSet = getSelectedSet();
     toggleSetActivenessButtonSelector.text(globalFavSets.isActive[selectedSet] ? "無効にする" : "有効にする");
     setDeleteButtonSelector.text(favSets.isSpecialSet(selectedSet) ? "クリア" : "セット削除");
@@ -142,7 +141,6 @@ export default function(){
 
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-        console.log("reader onload");
         try{
             let parsedSets = favSets.parse(readerEvent.target.result);
             globalFavSets.mergeWith(parsedSets);
