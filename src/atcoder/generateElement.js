@@ -2,7 +2,7 @@ import dropdownElement from "./html/dropdownElement.html";
 import modal from "./html/modal.html";
 import globalFavSets from "./globalFavSets";
 import {favSets} from "../favs";
-import {saveFile} from "../files";
+import {getObjectURL} from "../files";
 import * as $ from "jquery";
 import getTimeStamp from "../getTimeStamp";
 
@@ -52,12 +52,27 @@ function updateTable() {
     }
 }
 
+function updateDownloadLink() {
+    const setExportElem = $("#fav-manager-set-export-button", modalNode)[0];
+    const key = getSelectedSet();
+    let exportSets = new favSets();
+    exportSets.sets[key] = globalFavSets.sets[key];
+    exportSets.isActive[key] = true;
+    setExportElem.download = `favset-${key}-${getTimeStamp()}.json`;
+    setExportElem.href = getObjectURL(favSets.stringify(exportSets, false));
+
+    const allExportElem = $("#fav-manager-export-all-button", modalNode)[0];
+    allExportElem.download = `all-favsets-${getTimeStamp()}.json`;
+    allExportElem.href = getObjectURL(favSets.stringify(globalFavSets));
+}
+
 function updateView() {
     console.log(globalFavSets);
     const selectedSet = getSelectedSet();
     toggleSetActivenessButtonSelector.text(globalFavSets.isActive[selectedSet] ? "無効にする" : "有効にする");
     setDeleteButtonSelector.text(favSets.isSpecialSet(selectedSet) ? "クリア" : "セット削除");
     toggleSetActivenessButtonSelector.prop("disabled", selectedSet === "blacklist");
+    updateDownloadLink();
     updateSelector();
     updateTable();
 }
@@ -71,17 +86,6 @@ window.addEventListener("storage", event => {
 export default function(){
     $("body").prepend(modalNode);
     $(".navbar-right .dropdown-menu .divider:nth-last-child(2)").before(dropdownNode);
-
-    $("#fav-manager-export-all", modalNode).click(() => {
-        saveFile(favSets.stringify(globalFavSets), `all-favsets-${getTimeStamp()}.json`);
-    });
-    $("#fav-manager-set-export-button", modalNode).click(() => {
-        const key = getSelectedSet();
-        let exportSets = new favSets();
-        exportSets.sets[key] = globalFavSets.sets[key];
-        exportSets.isActive[key] = true;
-        saveFile(favSets.stringify(exportSets, false), `favset-${key}-${getTimeStamp()}.json`);
-    });
     setSelectSelector.change(updateView);
     setDeleteButtonSelector.click(() => {
         const key = getSelectedSet();
