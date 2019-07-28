@@ -146,11 +146,13 @@ export default function(){
             try{
                 let parsedSets = favSets.parse(readerEvent.target.result);
                 globalFavSets.mergeWith(parsedSets);
+                updateSelector();
+                setSelectedSet(Object.keys(parsedSets.sets)[0]);
                 storeFavs();
                 updateView();
             }
             catch (e){
-                console.log("failed to load");
+                alert("failed to load");
             }
         };
         for (let i = 0; i < files.length; i++){
