@@ -139,25 +139,28 @@ export default function(){
         storeFavs();
         updateView();
     });
+
+    let reader = new FileReader();
+    reader.onload = (readerEvent) => {
+        console.log("reader onload");
+        try{
+            let parsedSets = favSets.parse(readerEvent.target.result);
+            globalFavSets.mergeWith(parsedSets);
+            updateSelector();
+            setSelectedSet(Object.keys(parsedSets.sets)[0]);
+            storeFavs();
+            updateView();
+        }
+        catch (e){
+            alert("failed to load");
+        }
+    };
     selectImportFileButtonSelector.change((event) => {
         let files = event.target.files;
-        let reader = new FileReader();
-        reader.onload = (readerEvent) => {
-            try{
-                let parsedSets = favSets.parse(readerEvent.target.result);
-                globalFavSets.mergeWith(parsedSets);
-                updateSelector();
-                setSelectedSet(Object.keys(parsedSets.sets)[0]);
-                storeFavs();
-                updateView();
-            }
-            catch (e){
-                alert("failed to load");
-            }
-        };
         for (let i = 0; i < files.length; i++){
             reader.readAsText(files[i]);
         }
+        selectImportFileButtonSelector.val("");
     });
     $("#fav-manager-dropdown-button", dropdownNode).click(updateView);
     modalNode.ready(updateView);
