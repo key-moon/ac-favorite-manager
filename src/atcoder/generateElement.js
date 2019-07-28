@@ -12,7 +12,9 @@ const dropdownNode = $(dropdownElement);
 const setSelectSelector = $("#fav-manager-set-select", modalNode);
 const usersTableSelector = $("#fav-manager-users-table", modalNode);
 const setNameInputSelector = $("#fav-manager-add-set-input", modalNode);
+const addSetButtonSelector = $("#fav-manager-add-set-button", modalNode);
 const userNameInputSelector = $("#fav-manager-add-user-input", modalNode);
+const addUserButtonSelector = $("#fav-manager-add-user-button", modalNode)
 const setDeleteButtonSelector = $("#fav-manager-set-delete-button", modalNode);
 const selectImportFileButtonSelector = $("#fav-manager-select-import-file-button", modalNode);
 const toggleSetActivenessButtonSelector = $("#fav-manager-toggle-set-activeness-button", modalNode);
@@ -108,7 +110,10 @@ export default function(){
         storeFavs();
         updateView();
     });
-    $("#fav-manager-add-set-button", modalNode).click(() => {
+    setNameInputSelector.keypress(e => {
+         if (e.which === 13) addSetButtonSelector.click();
+    });
+    addSetButtonSelector.click(() => {
         const newSetName = setNameInputSelector.val();
         if (newSetName) {
             globalFavSets.createNewSet(newSetName);
@@ -119,7 +124,10 @@ export default function(){
         storeFavs();
         updateView();
     });
-    $("#fav-manager-add-user-button", modalNode).click(() => {
+    userNameInputSelector.keypress(e => {
+        if (e.which === 13) addUserButtonSelector.click();
+    });
+    addUserButtonSelector.click(() => {
         globalFavSets.sets[getSelectedSet()].add(userNameInputSelector.val());
         userNameInputSelector.val("");
         storeFavs();
