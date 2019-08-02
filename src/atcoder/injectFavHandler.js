@@ -34,7 +34,7 @@ export default function () {
 
     //migration
     if (!getLS('favmanager-favSets')) {
-        getLS('fav').forEach((user) => {
+        (getLS('fav') || []).forEach((user) => {
             globalFavSets.sets.default.add(user);
         });
         storeFavs();
